@@ -241,99 +241,27 @@
     <div class="card-body">
       <div class="table-responsive">
         <table id="userTable" class="table table-striped table-bordered">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Contact</th>
-              <th>Type</th>
-              <th>Created</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Fill with your server-side or JS-rendered rows -->
-          </tbody>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Contact</th>
+                    <th>Type</th>
+                    <th>Created</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
         </table>
+
       </div>
     </div>
   </div>
 </div>
 
-<!-- Include jQuery and DataTables JS -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
-<!-- Initialize DataTable -->
-<script>
-$(document).ready(function() {
-  $('#userTable').DataTable({
-    responsive: true,
-    language: {
-      search: "_INPUT_",
-      searchPlaceholder: "Search users..."
-    }
-  });
-});
-</script>
-
-  </div>
 
 
-
-
-  <script>
-function searchTable() {
-    const input = document.getElementById("searchInput").value.toLowerCase();
-    const rows = document.querySelectorAll("#ordersTable tbody tr");
-    rows.forEach(row => {
-        const text = row.textContent.toLowerCase();
-        row.style.display = text.includes(input) ? "" : "none";
-    });
-}
-</script>
-
-
-  <script>
-
-    $(document).ready(function() {
-        $('#ordersTable').DataTable({
-            responsive: true
-        });
-    });
-
-</script>
-
-  <!-- jQuery (if not already included) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-<!-- DataTables JS -->
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-
-  <script src="asset/js/plugins/apexcharts.min.js"></script>
-  <script src="asset/js/pages/dashboard-default.js"></script>
-  <script src="asset/js/plugins/popper.min.js"></script>
-  <script src="asset/js/plugins/simplebar.min.js"></script>
-  <script src="asset/js/plugins/bootstrap.min.js"></script>
-  <script src="asset/js/fonts/custom-font.js"></script>
-  <script src="asset/js/pcoded.js"></script>
-  <script src="asset/js/plugins/feather.min.js"></script>
-
-
-  <!---------- NEW SCRIPT ----------->
-
-  <script>
-      const userId = localStorage.getItem('user_id');
-  </script>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const userId = localStorage.getItem('user_id');
-      alert( userId);
-    });
-  </script>
 
   <!-- <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -341,50 +269,6 @@ function searchTable() {
       alert( userId);
     });
   </script> -->
-
-  <script>
-  document.getElementById('logoutBtn1').addEventListener('click', function(e) {
-    e.preventDefault();
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You will be logged out!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#6c757d',
-      confirmButtonText: 'Yes, logout',
-      background: '#ffffff',
-      color: '#000000'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem('user_id');
-        window.location.href = 'login_page.html'; // Your actual logout script
-      }
-    });
-  });
-
-  document.getElementById('logoutBtn').addEventListener('click', function(e) {
-    e.preventDefault();
-    Swal.fire({
-      title: 'Are you sure?',
-      text: "You will be logged out!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#6c757d',
-      confirmButtonText: 'Yes, logout',
-      background: '#ffffff',
-      color: '#000000'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem('user_id');
-        window.location.href = 'login_page.html'; // Your actual logout script
-      }
-    });
-  });
-  
-</script>
-
 
 <!-- Modal -->
 <div class="modal fade" id="userModal" tabindex="-1">
@@ -432,7 +316,11 @@ function searchTable() {
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- DataTables JS -->
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
 
   <script src="asset/js/plugins/apexcharts.min.js"></script>
   <script src="asset/js/pages/dashboard-default.js"></script>
@@ -442,7 +330,35 @@ function searchTable() {
   <script src="asset/js/fonts/custom-font.js"></script>
   <script src="asset/js/pcoded.js"></script>
   <script src="asset/js/plugins/feather.min.js"></script>
-  <script>
+<script>
+    $(document).ready(function() {
+        $('#ordersTable').DataTable({
+            responsive: true
+        });
+    });
+</script>
+<script>
+$(document).ready(function() {
+  $('#userTable').DataTable({
+    responsive: true,
+    language: {
+      search: "_INPUT_",
+      searchPlaceholder: "Search users..."
+    }
+  });
+});
+</script>
+<script>
+    function searchTable() {
+        const input = document.getElementById("searchInput").value.toLowerCase();
+        const rows = document.querySelectorAll("#ordersTable tbody tr");
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(input) ? "" : "none";
+        });
+    }
+  </script>
+<script>
     layout_change('light');
   </script>
   <script>
@@ -458,12 +374,98 @@ function searchTable() {
     font_change("Public-Sans");
   </script>
 
+
+  <!-- jQuery (if not already included) -->
+
+
+  <!---------- NEW SCRIPT ----------->
+
+  <script>
+      const userId = localStorage.getItem('user_id');
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const userId = localStorage.getItem('user_id');
+      alert( userId);
+    });
+  </script>
+  <script>
+  document.getElementById('logoutBtn1').addEventListener('click', function(e) {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You will be logged out!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Yes, logout',
+      background: '#ffffff',
+      color: '#000000'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('user_id');
+        window.location.href = 'login_page.html'; // Your actual logout script
+      }
+    });
+  });
+
+  document.getElementById('logoutBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You will be logged out!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#6c757d',
+      confirmButtonText: 'Yes, logout',
+      background: '#ffffff',
+      color: '#000000'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('user_id');
+        window.location.href = 'login_page.html'; // Your actual logout script
+      }
+    });
+  });
+  
+</script>
   
 <script>
 function loadUsers() {
-    $.get('https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/admin_temp_fetch_users.php', function(data) {
-        $('#userTable tbody').html(data);
-    });
+     $(document).ready(function() {
+            loadUsers();
+            $('#userTable').DataTable();
+        });
+
+        function loadUsers() {
+            $.get('https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/admin_temp_fetch_user.php', function(data) {
+                const tbody = $('#userTable tbody');
+                tbody.empty(); // Clear existing table data
+                data.forEach(user => {
+                    const deleteButton = user.can_delete ? 
+                        `<button class='btn btn-sm btn-danger' onclick='deleteUser(${user.id})'>Delete</button>` : '';
+                        
+                    tbody.append(`
+                        <tr>
+                            <td>${user.id}</td>
+                            <td>${user.name}</td>
+                            <td>${user.email}</td>
+                            <td>${user.contact}</td>
+                            <td>${user.user_type}</td>
+                            <td>${user.create_on}</td>
+                            <td>
+                                <button class='btn btn-sm btn-warning' onclick='editUser(${user.id})'>Edit</button>
+                                ${deleteButton}
+                            </td>
+                        </tr>
+                    `);
+                });
+            });
+        }
+
 }
 
 function openAddModal() {
@@ -549,9 +551,5 @@ loadUsers();
         loadUserProfileWidget();
     })();
 </script>
-
-
-
-
 </body>
 </html>
