@@ -169,8 +169,8 @@
                     </li>
                     <li class="dropdown pc-h-item header-user-profile">
                         <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
-                            <img src="" alt="user-image" class="user-avtar">
-                            <span></span>
+                            <img id="user-avatar" src="img/Profile.jpg" alt="user-image" class="user-avtar">
+                            <span id="user-name">Guest</span>
                         </a>
                         <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
                             <div class="tab-content" id="mysrpTabContent">
@@ -599,6 +599,23 @@ $(document).ready(function() {
             dd.appendChild(more);
           }
         });
+
+         if (userId) {
+            fetch(`https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_user.php?user_id=${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                alert(data.user.profile_image);
+                document.getElementById("user-avatar").src = "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/"+data.user.profile_image;
+                document.getElementById("user-name").textContent = data.name;
+                } else {
+                console.error("Error:", data.error);
+                }
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+            });
+        }
     } 
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem('cart')) || {};
