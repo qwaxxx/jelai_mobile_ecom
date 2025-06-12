@@ -1,0 +1,10 @@
+
+git add .
+git commit -m "06/13/2025-12:10"
+git push origin main
+
+
+git push  https://github.com/qwaxxx/jelai_mobile_ecom.git master
+
+
+git remote add origin https://github.com/qwaxxx/jelai_mobile_ecom.git
