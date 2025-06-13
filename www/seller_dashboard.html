@@ -27,32 +27,7 @@
     <link rel="stylesheet" href="css/style.min.css">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script>
-        // Immediately Invoked Function Expression (IIFE) to run the script on load
-        (function() {
-            // Retrieve user_id and user_type from local storage
-            const userId = localStorage.getItem('user_id');
-            const userType = localStorage.getItem('user_type');
-
-            // Check if user_id or user_type is not set
-            if (!userId && !userType) {
-                // Redirect to login page if either is not set
-                window.location.href = 'login.html'; // Change 'login.html' to your actual login page URL
-            } else {
-                // User is logged in, redirect based on user type
-                if (userType === 'customer') {
-                    window.location.href = 'customer_dashboard.html'; // Redirect to customer dashboard
-                } else if (userType === 'seller') {
-                    window.location.href = 'seller_dashboard.html'; // Redirect to seller dashboard
-                } else if (userType === 'admin') {
-                    window.location.href = 'admin_dashboard.html'; // Redirect to admin dashboard
-                } else {
-                    // Handle unknown user type or redirect to a default page
-                    window.location.href = 'index.html'; // Redirect to landing page or default page
-                }
-            }
-        })();
-    </script>
+ 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -640,7 +615,14 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-            
+                    const userType = localStorage.getItem('user_type');
+
+
+                    // Check if user_id or user_type is not set
+                     if (!userId || !userType) {
+                // Redirect to login page if either is not set
+                window.location.href = 'login_page.html'; // Change 'login.html' to your actual login page URL
+            } 
                 document.getElementById("user-avatar").src = "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/"+data.user.profile_image;
                 document.getElementById("user-name").textContent = data.name;
                 } else {
