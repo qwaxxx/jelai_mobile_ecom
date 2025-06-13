@@ -3,8 +3,8 @@ include("conn.php");
 
 // Retrieve user_id from the GET request
 $user_id = $_GET['user_id'] ?? null; // Get user_id from query parameters
-//$user_id = 9; // Get user_id from query parameters
-$limit   = isset($_GET['all']) ? 1000 : 10;
+
+$limit   = 10;
 
 if ($user_id === null) {
     echo json_encode(['result' => false, 'error' => 'User ID is required']);
@@ -22,7 +22,6 @@ try {
     $countResult = $countStmt->get_result();
     $countRow = $countResult->fetch_assoc();
     $unread_count = (int)$countRow['unread_count'];
-
 
     // 2) Fetch the notifications themselves
     $sql = "SELECT 
@@ -53,12 +52,12 @@ try {
             'status'        => $row['status'],
             'created_at'    => $row['created_at'],
             'prod_name'     => $row['prod_name'] ?: 'Product Notification',
-            'profile_image' => $row['profile_image'] ?: 'https://localhost/ecom-V6/img/Profile.jpg',
-            'url'           => 'https://localhost/ecom-V6/seller_transaction.php?id=' . $row['addcart_id'] // optional
+            'profile_image' => $row['profile_image'] ?: 'https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/Profile.jpg',
+            'url'           => 'https://orchid-chinchilla-614427.hostingersite.com/jellygrace/seller_transaction.html?id=' . $row['addcart_id'] // optional
         ];
     }
 
-    // 3) Return both in one JSON response
+    // 3) Return a successful response with unread_count and notifications
     echo json_encode([
         'result'        => true,
         'unread_count'  => $unread_count,

@@ -107,31 +107,7 @@
             <i class="ti ti-menu-2"></i>
           </a>
         </li>
-        <li class="dropdown pc-h-item d-inline-flex d-md-none">
-          <a
-            class="pc-head-link dropdown-toggle arrow-none m-0"
-            data-bs-toggle="dropdown"
-            href="#"
-            role="button"
-            aria-haspopup="false"
-            aria-expanded="false">
-            <i class="ti ti-search"></i>
-          </a>
-          <div class="dropdown-menu pc-h-dropdown drp-search">
-            <form class="px-3">
-              <div class="form-group mb-0 d-flex align-items-center">
-                <i data-feather="search"></i>
-                <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-              </div>
-            </form>
-          </div>
-        </li>
-        <li class="pc-h-item d-none d-md-inline-flex">
-          <form class="header-search">
-            <i data-feather="search" class="icon-search"></i>
-            <input type="search" class="form-control" placeholder="Search here. . .">
-          </form>
-        </li>
+       
       </ul>
     </div>
     <!-- [Mobile Media Block end] -->
@@ -469,7 +445,7 @@
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          alert(data.user.profile_image);
+   
           document.getElementById("user-avatar").src = "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/"+data.user.profile_image;
           document.getElementById("user-name").textContent = data.name;
         } else {
@@ -616,7 +592,7 @@
       
         .then(res => res.json())
         .then(data => {
-          alert(data.unread_count);
+          
           const badge = document.getElementById("notificationBadge");
           const dd = document.getElementById("notificationList");
 
@@ -699,7 +675,7 @@
         return;
       }
 
-      // If permission is not granted, request it
+       // If permission is not granted, request it
       if (Notification.permission !== "granted") {
         Notification.requestPermission();
       } else {
@@ -709,19 +685,22 @@
         // Check if 2 minutes have passed since the last notification
         if (currentTime - lastNotificationTime >= 120000) { // 120000 ms = 2 minutes
           $.ajax({
-            url: "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_notification.php",
+            url: `https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_notification.php?user_id=${userId}`,
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify({ user_id: userId }),
+           
             success: function(response) {
               if (response.result === true) {
+                
                 var notificationDetails = response.notifications;
                 for (var i = notificationDetails.length - 1; i >= 0; i--) {
                   var notificationUrl = notificationDetails[i]['url'];
+                  
                   var notificationObj = new Notification(notificationDetails[i]['prod_name'], {
                     body: notificationDetails[i]['message'],
+                    
                   });
-
+                  
                   // Set up notification click behavior
                   notificationObj.onclick = function() {
                     window.open(notificationUrl);

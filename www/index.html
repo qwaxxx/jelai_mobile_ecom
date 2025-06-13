@@ -6,14 +6,27 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>E-comme</title>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Material Design Bootstrap -->
-    <link href="css/mdb.min.css" rel="stylesheet">
-    <!-- Your custom styles (optional) -->
-    <link href="css/style.min.css" rel="stylesheet">
-    <style type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="asset/fonts/tabler-icons.min.css">
+    <link rel="stylesheet" href="asset/fonts/feather.css">
+    <link rel="stylesheet" href="asset/fonts/fontawesome.css">
+    <link rel="stylesheet" href="asset/fonts/material.css">
+    <link rel="stylesheet" href="asset/css/style.css">
+    <link rel="stylesheet" href="asset/css/style-preset.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/mdb.min.css">
+    <link rel="stylesheet" href="css/style.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+   <style type="text/css">
+
+        
         html, body, header, .carousel {
             height: 60vh;
         }
@@ -82,29 +95,33 @@
     <main>
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark mdb-color lighten-3 mt-3 mb-5">
-                <span class="navbar-brand">Categories:</span>
-                <div class="collapse navbar-collapse" id="basicExampleNav">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" id="showAll" href="#">All<span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <select class="form-control nav-link mdb-color lighten-3" name="price_range" id="price_range" style="color:aqua;height:42px;margin-left:2px">
-                                <option value="">Select price range</option>
-                                <option value="0-10000">₱0 - ₱10000</option>
-                                <option value="10001-20000">₱10001 - ₱20000</option>
-                                <option value="20001-30000">₱20001 - ₱30000</option>
-                                <option value="30001-130000">₱30001 - ₱130000</option>
-                            </select>
-                        </li>
-                    </ul>
-                    <form class="form-inline">
-                        <div class="md-form my-0">
-                            <input class="form-control mr-sm-2" type="text" placeholder="Search" id="search" aria-label="Search">
-                        </div>
-                    </form>
-                </div>
-            </nav>
+                    <span class="navbar-brand">Categories:</span>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav" aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="basicExampleNav">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" id="showAll" href="#">All <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <select class="form-control nav-link lighten-3" name="price_range" id="price_range" style="color:aqua;height:42px;margin-left:2px">
+                                    <option value="">Select price range</option>
+                                    <option value="0-10000">₱0 - ₱10000</option>
+                                    <option value="10001-20000">₱10001 - ₱20000</option>
+                                    <option value="20001-30000">₱20001 - ₱30000</option>
+                                    <option value="30001-130000">₱30001 - ₱130000</option>
+                                </select>
+                            </li>
+                        </ul>
+                        
+                        <form class="form-inline ml-auto">
+                            <div class="md-form my-0">
+                                <input class="form-control form-control-sm" type="text" placeholder="Search" id="search" aria-label="Search">
+                            </div>
+                        </form>
+                    </div>
+                </nav>
             <div id="productContainer"></div>
         </div>
     </main>
@@ -127,11 +144,11 @@
     </footer>
     
     <!-- Scripts -->
-    <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/mdb.min.js"></script>
-    
+   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
             loadProducts();
@@ -416,5 +433,29 @@ function addToCart(form) {
 
 
    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+     
+    <script src="asset/js/plugins/apexcharts.min.js"></script>
+  <script src="asset/js/pages/dashboard-default.js"></script>
+  <script src="asset/js/plugins/popper.min.js"></script>
+  <script src="asset/js/plugins/simplebar.min.js"></script>
+  <script src="asset/js/plugins/bootstrap.min.js"></script>
+  <script src="asset/js/fonts/custom-font.js"></script>
+  <script src="asset/js/pcoded.js"></script>
+  <script src="asset/js/plugins/feather.min.js"></script>
+  <script>
+    layout_change('light');
+  </script>
+  <script>
+    change_box_container('false');
+  </script>
+  <script>
+    layout_rtl_change('false');
+  </script>
+  <script>
+    preset_change("preset-1");
+  </script>
+  <script>
+    font_change("Public-Sans");
+  </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Dashboard</title>
+  <title>Transaction</title>
   <!-- [Meta] -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
@@ -44,13 +44,13 @@
       <ul class="pc-navbar">
 
         <li class="pc-item">
-          <a href="seller_dashboard.php" class="pc-link">
+          <a href="seller_dashboard.html" class="pc-link">
             <span class="pc-micon"><i class="ti ti-dashboard"></i></span>
             <span class="pc-mtext">Dashboard</span>
           </a>
         </li>
         <li class="pc-item">
-          <a href="seller_transaction.php" class="pc-link">
+          <a href="seller_transaction.html" class="pc-link">
             <span class="pc-micon"><i class="ti ti-history"></i></span>
             <span class="pc-mtext">Transaction</span>
           </a>
@@ -61,7 +61,7 @@
           <i class="ti ti-news"></i>
         </li>
         <li class="pc-item">
-          <a href="seller_profile.php" class="pc-link">
+          <a href="seller_profile.html" class="pc-link">
             <span class="pc-micon"><i class="ti ti-user"></i></span>
             <span class="pc-mtext">Profile</span>
           </a>
@@ -110,31 +110,7 @@
             <i class="ti ti-menu-2"></i>
           </a>
         </li>
-        <li class="dropdown pc-h-item d-inline-flex d-md-none">
-          <a
-            class="pc-head-link dropdown-toggle arrow-none m-0"
-            data-bs-toggle="dropdown"
-            href="#"
-            role="button"
-            aria-haspopup="false"
-            aria-expanded="false">
-            <i class="ti ti-search"></i>
-          </a>
-          <div class="dropdown-menu pc-h-dropdown drp-search">
-            <form class="px-3">
-              <div class="form-group mb-0 d-flex align-items-center">
-                <i data-feather="search"></i>
-                <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-              </div>
-            </form>
-          </div>
-        </li>
-        <li class="pc-h-item d-none d-md-inline-flex">
-          <form class="header-search">
-            <i data-feather="search" class="icon-search"></i>
-            <input type="search" class="form-control" placeholder="Search here. . .">
-          </form>
-        </li>
+        
       </ul>
     </div>
     <!-- [Mobile Media Block end] -->
@@ -604,7 +580,7 @@
     function updateStatus(orderId, status) {
      
       const userId = localStorage.getItem('user_id');
-      alert(userId);
+    
     // Fetch data from server
       fetch(`https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/seller_update_status.php?user_id=${userId}&orderId=${orderId}&status=${status}`, {
           method: 'POST',
@@ -662,6 +638,23 @@
   </script>
   <script>
     function loadNotifications(all = false) {
+  
+      window.onload = function () {
+        const params = new URLSearchParams(window.location.search);
+        const searchValue = params.get("search");
+        if (searchValue) {
+          const searchInput = document.getElementById("searchInput");
+          if (searchInput) {
+            searchInput.value = searchValue;
+            setTimeout(() => {
+              searchTable();
+            }, 200); 
+          // Or any function you use to filter/search
+          }
+        }
+      };
+
+
       const userId = localStorage.getItem('user_id');
       updateCartBadge()
       const url = all ?
@@ -672,7 +665,7 @@
       
         .then(res => res.json())
         .then(data => {
-          alert(data.unread_count);
+      
           const badge = document.getElementById("notificationBadge");
           const dd = document.getElementById("notificationList");
 
@@ -714,7 +707,7 @@
               .then(response => response.json())
               .then(data => {
                 if (data.success) {
-                  alert(data.user.profile_image);
+                 
                   document.getElementById("user-avatar").src = "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/"+data.user.profile_image;
                   document.getElementById("user-name").textContent = data.name;
                 } else {
@@ -763,68 +756,7 @@
           }
         });
     }
-    var lastNotificationTime = 0;
 
-    function getNotification() {
-      
-      // Check if the browser supports notifications
-      if (!("Notification" in window)) {
-        $('body').append('<h4 style="color:red">*Browser does not support Web Notification</h4>');
-        return;
-      }
-
-      // If permission is not granted, request it
-      if (Notification.permission !== "granted") {
-        Notification.requestPermission();
-      } else {
-        // Get the current time
-        var currentTime = Date.now();
-        const userId = localStorage.getItem('user_id');
-        // Check if 2 minutes have passed since the last notification
-        if (currentTime - lastNotificationTime >= 120000) { // 120000 ms = 2 minutes
-          $.ajax({
-            url: "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_notification.php",
-            type: "POST",
-            contentType: "application/json",
-            data: JSON.stringify({ user_id: userId }),
-            success: function(response) {
-              if (response.result === true) {
-                var notificationDetails = response.notifications;
-                for (var i = notificationDetails.length - 1; i >= 0; i--) {
-                  var notificationUrl = notificationDetails[i]['url'];
-                  var notificationObj = new Notification(notificationDetails[i]['prod_name'], {
-                    body: notificationDetails[i]['message'],
-                  });
-
-                  // Set up notification click behavior
-                  notificationObj.onclick = function() {
-                    window.open(notificationUrl);
-                    notificationObj.close();
-                  };
-
-                  // Close the notification after 5 seconds
-                  setTimeout(function() {
-                    notificationObj.close();
-                  }, 5000);
-
-                  // Update the last notification time
-                  lastNotificationTime = currentTime;
-                  break; // Stop once we have sent one notification
-                }
-              }
-            },
-            error: function(jqXHR, textStatus, errorThrown) {
-              console.error("Error fetching notifications", textStatus, errorThrown);
-            }
-          });
-        }
-      }
-    }
-    getNotification();
-    setInterval(function() {
-      getNotification();
-    }, 20000);
-    // Call the notification function every 2 minutes
     document.addEventListener("DOMContentLoaded", () => loadNotifications());
   </script>
 

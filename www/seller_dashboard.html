@@ -13,6 +13,8 @@
 
     <!-- [Favicon] icon -->
     <link rel="icon" href="asset/images/favicon.svg" type="image/x-icon">
+    
+       <link rel="icon" href="asset/images/favicon.svg" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="asset/fonts/tabler-icons.min.css">
     <link rel="stylesheet" href="asset/fonts/feather.css">
@@ -23,6 +25,14 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/mdb.min.css">
     <link rel="stylesheet" href="css/style.min.css">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 
     <style>
         .modal1 {
@@ -123,50 +133,31 @@
                             <i class="ti ti-menu-2"></i>
                         </a>
                     </li>
-                    <li class="dropdown pc-h-item d-inline-flex d-md-none">
-                        <a class="pc-head-link dropdown-toggle arrow-none m-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                            <i class="ti ti-search"></i>
-                        </a>
-                        <div class="dropdown-menu pc-h-dropdown drp-search">
-                            <form class="px-3">
-                                <div class="form-group mb-0 d-flex align-items-center">
-                                    <i data-feather="search"></i>
-                                    <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . .">
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li class="pc-h-item d-none d-md-inline-flex">
-                        <form class="header-search">
-                            <i data-feather="search" class="icon-search"></i>
-                            <input type="search" class="form-control" placeholder="Search here. . .">
-                        </form>
-                    </li>
+                    
                 </ul>
             </div>
             <div class="ms-auto">
                 <ul class="list-unstyled">
                     <li class="dropdown pc-h-item">
-                        <a class="pc-head-link dropdown-toggle arrow-none position-relative" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="ti ti-bell fs-5"></i>
-                            <span id="notificationBadge" class="badge bg-danger rounded-pill position-absolute top-70 start-95 translate-middle"  >0</span>
-                        </a>
-
-                        <div class="dropdown-menu dropdown-menu-end pc-h-dropdown shadow dropdown-notification">
-                            <div class="dropdown-header d-flex align-items-center justify-content-between px-3 py-2">
-                                <h6 class="mb-0 fw-semibold text-dark">Notifications</h6>
-                                <a href="#" class="text-danger" onclick="clearNotifications(event)">
-                                    <i class="ti ti-x fs-6"></i>
-                                </a>
-                            </div>
-                            <div class="dropdown-divider my-0"></div>
-                            <div class="px-2 py-1 overflow-auto" style="max-height: calc(100vh - 215px);" id="notificationList"></div>
-                            <div class="dropdown-divider my-0"></div>
-                            <div class="text-center py-2">
-                                <a href="#" class="text-primary fw-semibold small">View All</a>
-                            </div>
+                    <a class="pc-head-link dropdown-toggle arrow-none position-relative" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                        <i class="ti ti-bell fs-5"></i>
+                        <span id="notificationBadge" class="badge bg-danger rounded-pill position-absolute top-70 start-95 translate-middle">0</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end pc-h-dropdown shadow dropdown-notification">
+                        <div class="dropdown-header d-flex align-items-center justify-content-between px-3 py-2">
+                            <h6 class="mb-0 fw-semibold text-dark">Notifications</h6>
+                            <a href="#" class="text-danger" onclick="loadNotifications(true)">
+                                <i class="ti ti-x fs-6"></i>
+                            </a>
                         </div>
-                    </li>
+                        <div class="dropdown-divider my-0"></div>
+                        <div id="notificationList" class="px-2 py-1 overflow-auto" style="max-height: calc(100vh - 215px);"></div>
+                        <div class="dropdown-divider my-0"></div>
+                        <div class="text-center py-2">
+                            <a href="#" class="text-primary fw-semibold small" onclick="loadNotifications(true)">View All</a>
+                        </div>
+                    </div>
+                </li>
                     <li class="dropdown pc-h-item header-user-profile">
                         <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" data-bs-auto-close="outside" aria-expanded="false">
                             <img id="user-avatar" src="img/Profile.jpg" alt="user-image" class="user-avtar">
@@ -316,12 +307,32 @@
         </div>
     </div>
 </div>
-
+<footer class="bg-dark text-white py-3 mt-auto">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md text-center text-md-start mb-2 mb-md-0">
+                    <small>&copy; 2025 E-commerce. All rights reserved.</small>
+                </div>
+                <!-- <div class="col-md-auto text-center text-md-end">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item"><a href="#" class="text-white text-decoration-none">E-commerce</a></li>
+                    </ul>
+                </div> -->
+            </div>
+        </div>
+    </footer>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script src="js/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="asset/js/plugins/apexcharts.min.js"></script>
+    <script src="asset/js/pages/dashboard-default.js"></script>
+    <script src="asset/js/plugins/popper.min.js"></script>
+    <script src="asset/js/plugins/simplebar.min.js"></script>
+    <script src="asset/js/plugins/bootstrap.min.js"></script>
+    <script src="asset/js/fonts/custom-font.js"></script>
+    <script src="asset/js/pcoded.js"></script>
+    <script src="asset/js/plugins/feather.min.js"></script>
 <script>
 $(document).ready(function() {
     updateCartBadge()
@@ -562,10 +573,8 @@ $(document).ready(function() {
       
         .then(res => res.json())
         .then(data => {
-          alert(data.unread_count);
           const badge = document.getElementById("notificationBadge");
           const dd = document.getElementById("notificationList");
-
           // 1) Update badge with unread_count
           badge.textContent = data.unread_count;
           // 2) Build dropdown list of all notifications
@@ -605,7 +614,7 @@ $(document).ready(function() {
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                alert(data.user.profile_image);
+            
                 document.getElementById("user-avatar").src = "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/"+data.user.profile_image;
                 document.getElementById("user-name").textContent = data.name;
                 } else {
@@ -645,8 +654,7 @@ $(document).ready(function() {
         .then(r => r.json())
         .then(resp => {
           if (resp.success) {
-            document.getElementById("searchInput").value = orderId;
-            searchTable();
+            window.location.href = `seller_transaction.html?search=${encodeURIComponent(orderId)}`;
             loadNotifications(); // refresh both badge & list
           } else {
             alert("Failed to mark as read");
@@ -673,19 +681,22 @@ $(document).ready(function() {
         // Check if 2 minutes have passed since the last notification
         if (currentTime - lastNotificationTime >= 120000) { // 120000 ms = 2 minutes
           $.ajax({
-            url: "https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_notification.php",
+            url: `https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_notification.php?user_id=${userId}`,
             type: "POST",
             contentType: "application/json",
-            data: JSON.stringify({ user_id: userId }),
+           
             success: function(response) {
               if (response.result === true) {
+                
                 var notificationDetails = response.notifications;
                 for (var i = notificationDetails.length - 1; i >= 0; i--) {
                   var notificationUrl = notificationDetails[i]['url'];
+                  
                   var notificationObj = new Notification(notificationDetails[i]['prod_name'], {
                     body: notificationDetails[i]['message'],
+                    
                   });
-
+                  
                   // Set up notification click behavior
                   notificationObj.onclick = function() {
                     window.open(notificationUrl);
@@ -717,16 +728,9 @@ $(document).ready(function() {
     // Call the notification function every 2 minutes
     document.addEventListener("DOMContentLoaded", () => loadNotifications());
   </script>
-    <?php include("seller_footer.php"); ?>
+   
 
-    <script src="asset/js/plugins/apexcharts.min.js"></script>
-  <script src="asset/js/pages/dashboard-default.js"></script>
-  <script src="asset/js/plugins/popper.min.js"></script>
-  <script src="asset/js/plugins/simplebar.min.js"></script>
-  <script src="asset/js/plugins/bootstrap.min.js"></script>
-  <script src="asset/js/fonts/custom-font.js"></script>
-  <script src="asset/js/pcoded.js"></script>
-  <script src="asset/js/plugins/feather.min.js"></script>
+ 
   <script>
     layout_change('light');
   </script>

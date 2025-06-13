@@ -79,7 +79,7 @@
           </a>
         </li>
         <li class="pc-item">
-          <a href="#" id="logoutBtn" class="pc-link">
+          <a href="#" id="logoutBtn1" class="pc-link">
             <span class="pc-micon"><i class="ti ti-logout"></i></span>
             <span class="pc-mtext">Logout</span>
           </a>
@@ -106,7 +106,6 @@
 </nav>
 <!-- [ Sidebar Menu ] end --> <!-- [ Header Topbar ] start -->
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <header class="pc-header">
   <div class="header-wrapper"> <!-- [Mobile Media Block] start -->
@@ -143,7 +142,12 @@
         </form>
       </div>
     </li>
-   
+    <li class="pc-h-item d-none d-md-inline-flex">
+      <form class="header-search">
+        <i data-feather="search" class="icon-search"></i>
+        <input type="search" class="form-control" placeholder="Search here. . .">
+      </form>
+    </li>
   </ul>
 </div>
 <!-- [Mobile Media Block end] -->
@@ -185,8 +189,8 @@
         data-bs-auto-close="outside"
         aria-expanded="false"
       >
-        <img id="userProfilePreview_<?php echo uniqid(); ?>" src="https://via.placeholder.com/150" alt="User profile image" class="user-avtar">
-        <span id="userProfileName_<?php echo uniqid(); ?>"></span>
+        <img id="userProfilePreview" src="https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/Profile.jpg" alt="User profile image" class="user-avtar">
+        <span id="userProfileName"></span>
       </a>
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
         <div class="tab-content" id="mysrpTabContent">
@@ -209,51 +213,63 @@
 </header>
 <!-- [ Header ] end -->
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
-  <!-- [ Main Content ] start -->
-  <div class="pc-container">
-    
-    <div class="container pt-4">
+<!-- [ Main Content ] start -->
+<div class="pc-container">
+  <div class="container pt-4">
 
-      
-<div class="container">
+    <div class="row">
+      <div class="col-12">
 
-  <form id="profileForm" enctype="multipart/form-data">
-        <div class="mb-3">
-            <img id="profilePreview" src="https://via.placeholder.com/150" class="rounded-circle mb-3" width="120" height="120">
-            <input type="file" name="profile_image" id="profile_image" class="form-control">
-        </div>
+        <form id="profileForm" enctype="multipart/form-data" class="card p-4 shadow-sm bg-white rounded">
+          <div class="row mb-3">
+            <div class="col-12 text-center">
+              <img id="profilePreview" 
+                   src="https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/Profile.jpg" 
+                   class="rounded-circle mb-3" width="120" height="120">
+              <input type="file" name="profile_image" id="profile_image" class="form-control">
+            </div>
+          </div>
 
-        <div class="mb-3">
-            <label class="form-label">Name</label>
-            <input type="text" name="name" class="form-control" required id="name" >
-        </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Name</label>
+              <input type="text" name="name" class="form-control" required id="name">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Email Address</label>
+              <input type="email" name="email" class="form-control" required id="email">
+            </div>
+          </div>
 
-        <div class="mb-3">
-            <label class="form-label">Email Address</label>
-            <input type="email" name="email" class="form-control" required  id="email">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Contact</label>
-            <input type="text" name="contact" class="form-control" required  id="contact">
-        </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label class="form-label">Contact</label>
+              <input type="text" name="contact" class="form-control" required id="contact">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">New Password 
+                <small class="text-muted">(Leave blank to keep current)</small>
+              </label>
+              <input type="password" name="password" class="form-control">
+            </div>
+          </div>
 
-        <div class="mb-3">
-            <label class="form-label">New Password <small class="text-muted">(Leave blank to keep current)</small></label>
-            <input type="password" name="password" class="form-control">
-        </div>
+          <div class="row">
+            <div class="col-12 text-end">
+              <button type="submit" class="btn btn-primary">Update Profile</button>
+            </div>
+          </div>
+        </form>
 
-        <button type="submit" class="btn btn-primary">Update Profile</button>
-    </form>
-
-</div>
-
-
+      </div>
     </div>
+
   </div>
-  <!-- [ Main Content ] end -->
+</div>
+<!-- [ Main Content ] end -->
+
 
 <footer class="pc-footer">
   <div class="footer-wrapper container-fluid">
@@ -269,7 +285,7 @@
     </div>
   </div>
 </footer>
-  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="asset/js/plugins/apexcharts.min.js"></script>
   <script src="asset/js/pages/dashboard-default.js"></script>
   <script src="asset/js/plugins/popper.min.js"></script>
@@ -291,7 +307,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const userId = localStorage.getItem('user_id');
-      alert( userId);
+      //alert( userId);
     });
   </script>
 
@@ -316,8 +332,10 @@
         document.getElementById('name').value = data.name;
         document.getElementById('email').value = data.email;
         document.getElementById('contact').value = data.contact;
+        document.getElementById('userProfilePreview').src = data.profile_image ? 
+          `${API_BASE}/../img/${data.profile_image}` : 'https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/Profile.jpg';
         document.getElementById('profilePreview').src = data.profile_image ? 
-          `${API_BASE}/../img/${data.profile_image}` : 'https://via.placeholder.com/150';
+          `${API_BASE}/../img/${data.profile_image}` : 'https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/Profile.jpg';
       } catch (error) {
         Swal.fire('Error', 'Failed to load profile', 'error');
         console.error('Error loading profile:', error);
@@ -371,17 +389,14 @@
         // Unique constants for this instance
         const PROFILE_WIDGET_API_BASE = 'https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api';
         const PROFILE_USER_ID = localStorage.getItem('user_id');
-        
-        // Get elements with unique IDs
-        const profilePreviewEl = document.getElementById('userProfilePreview_<?php echo uniqid(); ?>');
-        const profileNameEl = document.getElementById('userProfileName_<?php echo uniqid(); ?>');
 
         if (!PROFILE_USER_ID) {
             Swal.fire('Error', 'User not logged in', 'error');
             // Redirect to login page or handle unauthorized access
             return;
         }
-
+        const profilePreviewEl = document.getElementById('userProfilePreview');
+        const profileNameEl = document.getElementById('userProfileName');
         async function loadUserProfileWidget() {
             try {
                 const res = await fetch(`${PROFILE_WIDGET_API_BASE}/admin_get_profile.php?user_id=${PROFILE_USER_ID}`);
@@ -393,7 +408,7 @@
 
                 profileNameEl.textContent = data.name;
                 profilePreviewEl.src = data.profile_image ? 
-                    `${PROFILE_WIDGET_API_BASE}/../img/${data.profile_image}` : 'https://via.placeholder.com/150';
+                    `${PROFILE_WIDGET_API_BASE}/../img/${data.profile_image}` : 'https://orchid-chinchilla-614427.hostingersite.com/jellygrace/img/Profile.jpg';
             } catch (error) {
                 Swal.fire('Error', 'Failed to load profile', 'error');
                 console.error('Profile widget error:', error);
