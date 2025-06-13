@@ -192,6 +192,7 @@
     <!-- SCRIPTS -->
     <!-- JQuery -->
     <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         function updateCartBadge() {
             const cart = JSON.parse(localStorage.getItem('cart')) || {};
@@ -354,7 +355,7 @@ fetch('https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_c
     if (userId) formData.append("user_id", userId);
     if (tempId) formData.append("temp_id", tempId);
     if (cart) formData.append("cart", cart);
-        alert("Server response:"+ userId +" "+tempId );
+        
 
     fetch("https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/process_billing.php", {
     method: "POST",
@@ -362,22 +363,45 @@ fetch('https://orchid-chinchilla-614427.hostingersite.com/jellygrace/api/fetch_c
 })
 .then(res => res.json())
 .then(data => {
-    if (data.status === 'redirect') {
-        alert(data.message);
+    
+if (data.status === 'redirect') {
+    Swal.fire({
+        title: 'Redirect',
+        text: data.message,
+        icon: 'warning',
+        confirmButtonText: 'OK'
+    }).then(() => {
         window.location.href = data.location; // redirect to login
-        return;
-    }
+    });
+    return;
+}
 
-    if (data.status === 'success') {
-        alert("Order processed successfully!");
+if (data.status === 'success') {
+    Swal.fire({
+        title: 'Success!',
+        text: "Order processed successfully!",
+        icon: 'success',
+        confirmButtonText: 'OK'
+    }).then(() => {
         localStorage.removeItem('cart');
         window.location.href = "customer_dashboard.html";
-        
-    } else if (data.error) {
-        alert("Error: " + data.error);
-    } else {
-        alert("Unexpected response");
-    }
+    });
+} else if (data.error) {
+    Swal.fire({
+        title: 'Error!',
+        text: "Error: " + data.error,
+        icon: 'error',
+        confirmButtonText: 'OK'
+    });
+} else {
+    Swal.fire({
+        title: 'Unexpected Response',
+        text: "Unexpected response",
+        icon: 'info',
+        confirmButtonText: 'OK'
+    });
+}
+
 })
 .catch(err => {
     console.error("Error:", err);

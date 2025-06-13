@@ -20,7 +20,32 @@
   <link rel="stylesheet" href="asset/fonts/material.css">
   <link rel="stylesheet" href="asset/css/style.css" id="main-style-link">
   <link rel="stylesheet" href="asset/css/style-preset.css">
+<script>
+        // Immediately Invoked Function Expression (IIFE) to run the script on load
+        (function() {
+            // Retrieve user_id and user_type from local storage
+            const userId = localStorage.getItem('user_id');
+            const userType = localStorage.getItem('user_type');
 
+            // Check if user_id or user_type is not set
+            if (!userId && !userType) {
+                // Redirect to login page if either is not set
+                window.location.href = 'login.html'; // Change 'login.html' to your actual login page URL
+            } else {
+                // User is logged in, redirect based on user type
+                if (userType === 'customer') {
+                    window.location.href = 'customer_dashboard.html'; // Redirect to customer dashboard
+                } else if (userType === 'seller') {
+                    window.location.href = 'seller_dashboard.html'; // Redirect to seller dashboard
+                } else if (userType === 'admin') {
+                    window.location.href = 'admin_dashboard.html'; // Redirect to admin dashboard
+                } else {
+                    // Handle unknown user type or redirect to a default page
+                    window.location.href = 'index.html'; // Redirect to landing page or default page
+                }
+            }
+        })();
+    </script>
 </head>
 
 <body data-pc-preset="preset-1" data-pc-direction="ltr" data-pc-theme="light">
